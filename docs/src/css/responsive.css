@@ -1,0 +1,225 @@
+/* Responsive design improvements */
+
+/* Base improvements for all screen sizes */
+:root {
+  --ifm-container-width-xl: 1320px;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.65;
+}
+
+/* Improve readability */
+article {
+  font-size: var(--ifm-font-size-base);
+  line-height: var(--ifm-line-height-base);
+}
+
+/* Better table responsiveness */
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+  }
+  
+  .hero__title {
+    font-size: 2rem;
+  }
+  
+  .hero__subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .features {
+    padding: 1.5rem 0;
+  }
+  
+  .featureImage {
+    height: 150px;
+    width: 150px;
+  }
+  
+  .navbar__items {
+    justify-content: center;
+  }
+  
+  /* Improve code blocks on mobile */
+  pre {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+  
+  /* Adjust command line display on mobile */
+  .command-line {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Better spacing for mobile */
+  .section {
+    padding: 2rem 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+  
+  /* Improve table display on mobile */
+  .compatibility-table th,
+  .compatibility-table td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Adjust buttons for better touch targets */
+  .button {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+  }
+  
+  /* Improve platform badges on mobile */
+  .platform-badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    margin-right: 0.35rem;
+    margin-bottom: 0.35rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 996px) {
+  .hero {
+    padding: 3rem 2rem;
+  }
+  
+  .features {
+    padding: 2rem 0;
+  }
+  
+  /* Better spacing for tablets */
+  .section {
+    padding: 3rem 2rem;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1200px) {
+  .container {
+    max-width: var(--ifm-container-width-xl);
+  }
+  
+  /* Limit content width for better readability */
+  article {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+/* Dark mode optimizations */
+html[data-theme='dark'] {
+  --ifm-background-color: #1e1e2f;
+  --ifm-background-surface-color: #252538;
+  --ifm-toc-border-color: #2e2e3e;
+  
+  /* Improve contrast in dark mode */
+  --ifm-color-primary-lightest: #a5b4fc;
+  --ifm-color-primary-lighter: #818cf8;
+  --ifm-font-color-base: rgba(255, 255, 255, 0.87);
+  
+  /* Better code block contrast in dark mode */
+  --ifm-code-background: #2d2d3d;
+}
+
+/* Print optimizations */
+@media print {
+  .navbar,
+  .theme-doc-sidebar-container,
+  .theme-doc-toc-desktop,
+  .footer {
+    display: none !important;
+  }
+  
+  .main-wrapper {
+    max-width: 100% !important;
+  }
+  
+  article {
+    max-width: 100% !important;
+  }
+  
+  a {
+    text-decoration: none !important;
+    color: #000 !important;
+  }
+  
+  pre, code {
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
+  }
+  
+  .theme-doc-markdown {
+    padding: 0 !important;
+  }
+}
+
+/* Accessibility improvements */
+:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Performance optimizations */
+.navbar {
+  will-change: transform;
+}
+
+.hero__title, 
+.hero__subtitle {
+  will-change: opacity;
+}
+
+/* Improve image loading */
+img {
+  content-visibility: auto;
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
