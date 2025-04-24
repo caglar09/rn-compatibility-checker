@@ -1,15 +1,14 @@
 {
   "name": "rn-compatibility-checker",
   "version": "1.0.0",
-  "description": "React Native kütüphanelerinin platform uyumluluğunu kontrol eden CLI aracı",
+  "description": "CLI tool to check platform compatibility of React Native libraries",
   "main": "src/index.js",
   "bin": {
     "rn-compatibility-checker": "./bin/cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/cli.js",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm test",
   },
   "keywords": [
     "react-native",
@@ -22,7 +21,7 @@
     "web",
     "expo"
   ],
-  "author": "",
+  "author": "Caglar YILDIRIM",
   "license": "MIT",
   "dependencies": {
     "axios": "^1.8.4",
@@ -36,12 +35,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/username/rn-compatibility-checker.git"
+    "url": "https://github.com/caglar09/rn-compatibility-checker.git"
   },
   "bugs": {
-    "url": "https://github.com/username/rn-compatibility-checker/issues"
+    "url": "https://github.com/caglar09/rn-compatibility-checker/issues"
   },
-  "homepage": "https://github.com/username/rn-compatibility-checker#readme",
+  "homepage": "https://github.com/caglar09/rn-compatibility-checker#readme",
   "files": [
     "bin/",
     "src/",
