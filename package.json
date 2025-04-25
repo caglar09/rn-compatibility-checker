@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node ./bin/cli.js",
     "prepublishOnly": "npm test",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "react-native",
