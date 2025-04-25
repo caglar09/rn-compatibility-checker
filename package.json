@@ -10,7 +10,11 @@
     "start": "node ./bin/cli.js",
     "prepublishOnly": "npm test",
     "test": "echo \"Error: no test specified\"",
-    "build": "mkdir -p dist && cp -r src bin test LICENSE package.json yarn.lock README.md react-native-libraries.json dist"
+    "build": "mkdir -p dist && cp -r src bin test LICENSE package.json yarn.lock README.md react-native-libraries.json dist",
+    "clear": "rm -rf ./dist",
+    "pack:install": "yarn clear && yarn build && cd dist && yarn && yarn pack && yarn add ./rn-compatibility-checker-v1.0.1.tgz -g && yarn pack:test",
+    "pack:test": "rn-compatibility-checker ./test/sample-project/package.json -p ios,android,web,windows,expoGo,newArchitecture -d -f csv",
+    "pack:local:test": "node ./bin/cli.js ./test/sample-project/package.json -p ios,android,web,windows,expoGo,newArchitecture -d -f table"
   },
   "keywords": [
     "react-native",
