@@ -21,18 +21,18 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20'
-        registry-url: 'https://registry.npmjs.org/' # veya github registry kullanıyorsan değiştir
+        registry-url: 'https://registry.npmjs.org/'
 
     - name: Extract version (remove "v")
       id: extract_version
       run: |
         echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
         RAW_VERSION=${GITHUB_REF#refs/heads/release/}
-        VERSION=${RAW_VERSION#v} # baştaki "v" harfini kaldır
+        VERSION=${RAW_VERSION#v}
         echo "VERSION=$VERSION" >> $GITHUB_ENV
         echo "Version extracted without v: $VERSION"
 
-    - name: Update package.json version
+    - name: Check and update package.json version
       run: |
         CURRENT_VERSION=$(node -p "require('./package.json').version")
         echo "Current version: $CURRENT_VERSION"
@@ -41,7 +41,7 @@ jobs:
           echo "Updating version..."
           npm version --no-git-tag-version $VERSION
         else
-          echo "Version already correct, no need to update."
+          echo "Version already correct, no update needed."
         fi
         cat package.json
 
@@ -49,17 +49,20 @@ jobs:
       run: npm install
 
     - name: Build project
-      run: npm run build
+      run: |
+        mkdir -p dist
+        cp -r src bin test LICENSE package.json yarn.lock README.md react-native-libraries.json dist
 
     - name: Publish to NPM
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: |
+        cd dist
         npm publish
 
     - name: Push updated package.json
       run: |
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
-        git commit -am "ci: update version to $VERSION [skip ci]"
+        git commit -am "ci: update version to $VERSION [skip ci]" || echo "No changes to commit"
         git push origin HEAD
