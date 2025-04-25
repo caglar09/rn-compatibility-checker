@@ -8,14 +8,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'RN Compatibility Checker',
   tagline: 'CLI tool for checking platform compatibility of React Native libraries',
-  url: 'https://rn-compatibility-checker.com',
-  baseUrl: '/',
+  url: 'https://caglar09.github.io',
+  baseUrl: '/rn-compatibility-checker/',
+  organizationName: 'caglar09',
+  projectName: 'rn-compatibility-checker',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'rn-compatibility-checker',
-  projectName: 'rn-compatibility-checker',
-
   scripts: [
     {
       src: '/js/responsive.js',
