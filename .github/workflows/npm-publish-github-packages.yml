@@ -1,0 +1,57 @@
+name: Build, Set Version and Publish
+
+on:
+  push:
+    branches:
+      - 'release/v*' # Sadece release/v... branch'larında çalışır
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        registry-url: 'https://registry.npmjs.org/' # veya github registry kullanıyorsan değiştir
+
+    - name: Extract version (remove "v")
+      id: extract_version
+      run: |
+        echo "BRANCH_NAME=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+        RAW_VERSION=${GITHUB_REF#refs/heads/release/}
+        VERSION=${RAW_VERSION#v} # baştaki "v" harfini kaldır
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "Version extracted without v: $VERSION"
+
+    - name: Update package.json version
+      run: |
+        npm version --no-git-tag-version $VERSION
+        cat package.json
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Publish to NPM
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        npm publish
+
+    - name: Push updated package.json
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git commit -am "ci: update version to $VERSION [skip ci]"
+        git push origin HEAD
