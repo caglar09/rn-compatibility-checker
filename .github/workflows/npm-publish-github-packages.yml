@@ -12,6 +12,7 @@ jobs:
     permissions:
       contents: write
       packages: write
+      pull-requests: write
 
     steps:
     - name: Checkout repository
@@ -83,3 +84,13 @@ jobs:
         body: ${{ env.RELEASE_NOTES }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create Pull Request to master
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "ci: merge release v${{ env.VERSION }} to master"
+        title: "Release v${{ env.VERSION }}"
+        body: "Automated pull request to merge release branch to master"
+        base: master
+        branch: ${{ env.BRANCH_NAME }}
