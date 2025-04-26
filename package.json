@@ -1,7 +1,7 @@
 {
   "name": "rn-compatibility-checker",
   "version": "1.0.1",
-  "description": "CLI tool to check platform compatibility of React Native libraries",
+  "description": "Cross-platform CLI for scanning React Native libraries’ compatibility on iOS, Android, Web, Windows, Expo & New Architecture",
   "main": "src/index.js",
   "bin": {
     "rn-compatibility-checker": "./bin/cli.js"
@@ -18,14 +18,23 @@
   },
   "keywords": [
     "react-native",
-    "compatibility",
-    "platform",
-    "checker",
+    "rn-compatibility-checker",
     "cli",
+    "command-line",
+    "compatibility",
+    "platform-support",
     "ios",
     "android",
     "web",
-    "expo"
+    "windows",
+    "expo",
+    "expo-go",
+    "new-architecture",
+    "dependency-check",
+    "report",
+    "csv",
+    "table",
+    "directory"
   ],
   "author": "Caglar YILDIRIM",
   "license": "MIT",
